@@ -67,10 +67,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     static uint16_t counter1sec = 0;
     if (htim->Instance == TIM2)
     {
-        if (++counter1sec == 1)
+        if (++counter1sec == 100)
         {
             counter1sec = 0;
             moistureLevel = GetMoisture();
+        }
+        if (moistureLevel < 1000)
+        {
+          HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+        }
+        else 
+        {
+          HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
         }
     }
 }
@@ -120,10 +128,7 @@ int main(void)
      // Reset the buffer content
       memset(TxBuffer, 0, sizeof(TxBuffer));
       size_t bufferSize = snprintf((char *)TxBuffer, sizeof(TxBuffer), "Moisture reading = %lu\n\r", moistureLevel);
-      if (moistureLevel < 1000)
-      {
-          
-      }
+
       CDC_Transmit_FS(TxBuffer, bufferSize);
       HAL_Delay(1000);
     /* USER CODE END WHILE */
