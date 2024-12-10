@@ -63,10 +63,6 @@ void Error_Handler(void);
 #define SENSOR_PWR_GPIO_Port GPIOA
 #define LED_Pin GPIO_PIN_11
 #define LED_GPIO_Port GPIOB
-#define SENSOR_PWRC10_Pin GPIO_PIN_10
-#define SENSOR_PWRC10_GPIO_Port GPIOC
-#define SENSORC11_Pin GPIO_PIN_11
-#define SENSORC11_GPIO_Port GPIOC
 
 /* USER CODE BEGIN Private defines */
 
